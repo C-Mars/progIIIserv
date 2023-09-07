@@ -1,0 +1,19 @@
+{
+  "name": "api-prog3",
+  "version": "1.0.0",
+  "description": "Api-TP integrador CampusAFA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C-Mars/progIIIserv.git"
+  },
+  "author": "Moreyra,Ezequiel. Pucheta,Claudia Marilin. Werffeli,Julian Reinaldo.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/C-Mars/progIIIserv/issues"
+  },
+  "homepage": "https://github.com/C-Mars/progIIIserv#readme"
+}
