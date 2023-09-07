@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/C-Mars/progIIIserv/issues"
   },
-  "homepage": "https://github.com/C-Mars/progIIIserv#readme"
+  "homepage": "https://github.com/C-Mars/progIIIserv#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
