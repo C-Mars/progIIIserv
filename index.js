@@ -7,6 +7,14 @@ require('dotenv').config();
 //utilizar nodemailer para enviar un email->importo el módulo
 const nodemailer = require('nodemailer');
 
+// ESTO NO SE VIO EN CLASES (falta ver pero con esto funciona)
+// para loguear las peticiones que recibe el servidor
+var morgan = require('morgan')
+//para trabajar con el sistema de archivos: crear leer etc archivos
+var fs = require('fs')
+// trabajar con las rutas de archivos y directorios del sistema de archivos
+var path = require('path')
+
 // utilizar el módulo cors
 const cors = require('cors');
 
@@ -54,10 +62,10 @@ app.post('/contacto',(req,res)=>{
         }
     });
     // Cuerpo del correo se puede personalizar más(agregando + html y css)
-    // const cuerpo =  `<h1>Hola llegó un correo de Contacto de parte de  ${nombre}  sobre  ${asunto} </h1>;
+    const cuerpo =  `<h1>Hola llegó un correo de Contacto de parte de  ${nombreyapellido}  sobre  ${asunto} </h1>`;
     
     
-    const cuerpo = '<h1>Hola llegó un correo de Contacto </h1>';
+    // const cuerpo = '<h1>Hola llegó un correo de Contacto </h1>';
     
     const opciones = {
         from : 'API CampusAFA',
