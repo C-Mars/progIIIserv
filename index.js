@@ -9,11 +9,11 @@ const nodemailer = require('nodemailer');
 
 // ESTO NO SE VIO EN CLASES (falta ver pero con esto funciona)
 // para loguear las peticiones que recibe el servidor
-var morgan = require('morgan')
+var morgan = require('morgan');
 //para trabajar con el sistema de archivos: crear leer etc archivos
-var fs = require('fs')
+var fs = require('fs');
 // trabajar con las rutas de archivos y directorios del sistema de archivos
-var path = require('path')
+var path = require('path');
 
 // utilizar el módulo cors
 const cors = require('cors');
