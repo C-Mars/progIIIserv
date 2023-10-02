@@ -27,8 +27,8 @@ const v1Publico = require('./src/v1/routes/publico');
 const v1Futbolista = require('./src/v1/routes/futbolista');
 
 // middleeare api (use las rutas definidas)
-app.use('/api/src/v1/publico', v1Publico);
-app.use('./api/src/v1/futbolista', v1Futbolista);
+app.use('/api/v1/publico', v1Publico);
+app.use('./api/v1/futbolista', v1Futbolista);
 
 
 
