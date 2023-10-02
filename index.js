@@ -21,16 +21,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
- // definir un rutas
-app.get('/', (req,res)=>{
-    // console.log('GET funciona')
-    const saludo = 'Hola salió';
-    res.status(200).json({saludo});
-});
+
 // Rutas del API
 const v1Publico = require('./src/v1/routes/publico');
+const v1Futbolista = require('./src/v1/routes/futbolista');
+
 // middleeare api (use las rutas definidas)
 app.use('/api/src/v1/publico', v1Publico);
+app.use('./api/src/v1/futbolista', v1Futbolista);
 
 
 
