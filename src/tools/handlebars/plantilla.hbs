@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,300;0,500;1,100;1,200;1,500&display=swap" rel="stylesheet">
+  <title>Consulta CampusAFA</title>
+  <style>
+    body {
+      display: flex;
+      font-family: 'Fira Sans Condensed', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      font-family: 'Fira Sans Condensed', sans-serif;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      width: 100%;
+      font-size: 30px;
+      background-color: #052035;
+      color: #ffffff;
+    }
+    p {
+      font-weight: 600;
+      font-size: 16px;
+      color: #027496;
+;
+    }    
+    li {
+      font-weight: 600;
+      font-size: 20px;
+      list-style: none;
+      align-items: center;
+      color:#052035;
+;
+    } 
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nuevo consulta desde Contacto.</h1>
+    <p>Recibiste una nueva consulta desde la App CampusAFA</p>    
+    <ul>
+        <li>Remitente de {{nombreyapellido}}</li>
+        <li>Remitente Correo electrónico  {{email}}</li>
+        <li>Asunto: {{asunto}}</li>    
+        <li>Consulta: {{comentario}}</li>    
+    </ul>
+  </div>
+</body>
+</html>
