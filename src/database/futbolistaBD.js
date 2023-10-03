@@ -1,6 +1,6 @@
 const conexion = require('./conexionBD');
 
-/*exports.buscarFutbolista = async () => {
+exports.buscarFutbolista = async () => {
 
     const consulta = `SELECT  dni, nombre, apellido,
     (CASE
@@ -11,11 +11,11 @@ const conexion = require('./conexionBD');
         ELSE ''
     END) AS posicion 
     FROM futbolista 
-    WHERE activo = 1`;
+    WHERE activo = 1` ;
 
-    //const [futbolista] = await conexion.query(consulta,);    
+    const [futbolistas] = await conexion.query(consulta);    
 
-    return futbolista;
-}*/
+    return futbolistas;
+}
 
 

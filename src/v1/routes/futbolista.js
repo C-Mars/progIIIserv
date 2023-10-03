@@ -1,13 +1,18 @@
 const { Router } = require('express');
 
-// const { } = require('../../controllers/futbolista');
+const { buscarFutbolista} = require('../../controllers/futbolista');
 
 
 const router = Router(); 
 
-//buscarFutbolista
-// router.get('/futbolista', buscarFutbolista);
+//buscarFutbolista  Activos
+router.get('/futbolistas', buscarFutbolista);
 
+//agregar
+
+//eliminar
+
+//modificar
 
 
 module.exports = router;
