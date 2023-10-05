@@ -16,16 +16,13 @@ exports.buscarFutbolista = async (req, res) => {
 };
 
 exports.buscarPorIdFutbolista = async (req, res) => {
+    const idFutbolista = req.params.idFutbolista;
     try {
-        const idFutbolista = req.params.idFutbolista;
-
         if (!idFutbolista) {
             res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });
+        } else {const futbolista = await futbolistaBD.buscarPorId(idFutbolista);
+            res.json({ estado: 'OK', dato: futbolista });
         }
-
-        const futbolista = await futbolistaBD.buscarPorId(idFutbolista);
-
-        res.json({ estado: 'OK', dato: futbolista });
 
     } catch (exec) {
         throw exec;
@@ -49,7 +46,7 @@ exports.eliminarFutbolista = async (req, res) => {
 };
 
 exports.crearFutbolista = async (req, res) => {
-    const { dni, nombre, apellido, posicion, apodo, foto, piehabil, activo } = req.body;
+    const { dni, nombre, apellido, posicion, apodo, foto, piehabil } = req.body;
 
     if (!dni || !nombre || !apellido || !posicion || !apodo || !foto || !piehabil) {
         return res.status(404).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
@@ -68,6 +65,7 @@ exports.crearFutbolista = async (req, res) => {
         try {
             const futbolistaNuevo = await futbolistaBD.crear(futbolista);
             res.status(201).json({ estado: 'OK', msj: 'Futbolista creado', dato: futbolistaNuevo });
+        
         } catch (error) {
             console.error(error);
             res.status(500).json({ estado: 'FALLO', msj: 'Error al crear el futbolista' });
