@@ -9,7 +9,14 @@ const buscarTodos = async () => {
         WHEN posicion = 2 THEN 'mediocampista'
         WHEN posicion = 3 THEN 'delantero'
         ELSE ''
-    END) AS posicion 
+    END)
+    AS posicion, apodo, foto, 
+    (CASE
+        WHEN piehabil = 0 THEN 'derecho'
+        WHEN piehabil = 1 THEN 'izquierdo'
+        ELSE ''
+    END)
+    As piehabil 
     FROM futbolista 
     WHERE activo = 1` ;
 
@@ -27,7 +34,14 @@ const buscarPorId = async (idFutbolista) => {
         WHEN posicion = 2 THEN 'mediocampista'
         WHEN posicion = 3 THEN 'delantero'
         ELSE ''
-    END) AS posicion 
+    END)
+    AS posicion, apodo, foto, 
+    (CASE
+        WHEN piehabil = 0 THEN 'derecho'
+        WHEN piehabil = 1 THEN 'izquierdo'
+        ELSE ''
+    END)
+    As piehabil 
     FROM futbolista 
     WHERE activo = 1 AND idFutbolista = ?` ;
 
@@ -41,9 +55,21 @@ const eliminar = async (idFutbolista) => {
     await conexion.query(consulta, [idFutbolista]);    
 }
 
+const crear = async (futbolista) => {
+
+
+    const consulta = 'INSERT INTO futbolista SET ?';
+    const [futbolistaNuevo] = await conexion.query(consulta, futbolista);
+
+    // console.log(futbolistaNuevo.insertId);
+
+    return buscarPorId(futbolistaNuevo.insertId);
+};
+
 module.exports ={
     buscarTodos,
     eliminar,
-    buscarPorId
+    buscarPorId,
+    crear
 
 }

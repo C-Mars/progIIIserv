@@ -49,11 +49,12 @@ exports.crearConvocatoria = async (req, res) => {
 
         try{
             const convocatoriaNuevo = await convocatoriaBD.crear(convocatoria);
-            res.status(201).json({estado:'ok', msj:'Convocatoria creada', dato:convocatoriaNuevo});
-        }catch(exec){
-            throw exec;
+            res.status(201).json({estado:'OK', msj:'Convocatoria creada', dato:convocatoriaNuevo});
+        }catch(error) {
+            console.error(error);
+            res.status(500).json({ estado: 'FALLO', msj: 'Error al crear una nueva convocatoria' });
         }
     }
-}
+};
 
    
