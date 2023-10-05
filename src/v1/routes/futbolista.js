@@ -1,7 +1,7 @@
 
 const { Router } = require('express');
 
-const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutbolista} = require('../../controllers/futbolista');
+const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutbolista,editarFutbolistaId} = require('../../controllers/futbolista');
 
 
 const router = Router(); 
@@ -18,7 +18,8 @@ router.post('/futbolistas', crearFutbolista);
 //eliminar
 router.delete('/futbolistas/:idFutbolista', eliminarFutbolista);
 
-//modificar
+//modificar ID
+router.put('/futbolistas/:idFutbolista', editarFutbolistaId)
 
 
 module.exports = router;
