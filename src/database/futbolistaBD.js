@@ -50,38 +50,35 @@ const buscarPorId = async (idFutbolista) => {
     return futbolista;
 }
 
-const buscarPor = async (busqueda) => {
+const buscarPorApellido = async (apellido) => {
+    try {
+        const consulta = `
+            SELECT dni, nombre, apellido,
+            (CASE
+                WHEN posicion = 0 THEN 'arquero'
+                WHEN posicion = 1 THEN 'defensor'
+                WHEN posicion = 2 THEN 'mediocampista'
+                WHEN posicion = 3 THEN 'delantero'
+                ELSE ''
+            END) AS posicion, apodo, foto,
+            (CASE
+                WHEN piehabil = 0 THEN 'derecho'
+                WHEN piehabil = 1 THEN 'izquierdo'
+                ELSE ''
+            END) AS piehabil
+            FROM futbolista
+            WHERE apellido LIKE ? AND activo = 1`;
 
-    const consulta = `SELECT  dni, nombre, apellido,
-    (CASE
-        WHEN posicion = 0 THEN 'arquero'
-        WHEN posicion = 1 THEN 'defensor'
-        WHEN posicion = 2 THEN 'mediocampista'
-        WHEN posicion = 3 THEN 'delantero'
-        ELSE ''
-    END)
-    AS posicion, apodo, foto, 
-    (CASE
-        WHEN piehabil = 0 THEN 'derecho'
-        WHEN piehabil = 1 THEN 'izquierdo'
-        ELSE ''
-    END)
-    As piehabil 
-    FROM futbolista 
-    WHERE
-        dni LIKE ? OR
-        nombre LIKE ? OR
-        apellido LIKE ? OR
-        posicionLIKE ? OR
-        apodo LIKE ? OR
-        piehabil LIKE ? OR
-        activo = 1` ;
+        // Verificar que el valor de "apellido" se esté pasando correctamente
+        console.log("Apellido a buscar:", apellido);
 
-    const [futbolistas] = await conexion.query(consulta,[`%${busqueda}%`,`%${busqueda}%`,`%${busqueda}%`,`%${busqueda}%`,`%${busqueda}%`,`%${busqueda}%`,`%${busqueda}%`]);    
+        const [futbolistas] = await conexion.query(consulta, [`%${apellido}%`]);
 
-    return futbolistas;
+        return futbolistas;
+    } catch (error) {
+        throw error;
+    }
 }
-
 
 const eliminar = async (idFutbolista) => {
     const consulta = 'UPDATE futbolista SET activo = 0 WHERE idFutbolista = ?';
@@ -120,8 +117,8 @@ module.exports ={
     buscarTodos,
     eliminar,
     buscarPorId,
+    buscarPorApellido,
     crear,
     editar,
-    buscarPor,
     editarPorId
 }

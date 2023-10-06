@@ -1,26 +1,29 @@
 
 const { Router } = require('express');
 
-const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutbolista,editarFutbolistaId} = require('../../controllers/futbolista');
+const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutbolista,editarFutbolistaId,buscarPorApellido} = require('../../controllers/futbolista');
 
 
 const router = Router(); 
 
-//buscarFutbolista  Activos
+//Buscar Futbolista  
 router.get('/futbolistas', buscarFutbolista);
-//buscarPorID
+//Buscar Futbolista  Por ID
 router.get('/futbolistas/:idFutbolista', buscarPorIdFutbolista);
 
-//agregar
+
+//agregar  Futbolista
 
 router.post('/futbolistas', crearFutbolista);
 
-//eliminar
+//eliminar Futbolista
 router.delete('/futbolistas/:idFutbolista', eliminarFutbolista);
 
-//modificar ID
+//modificar Futbolista ID
 router.put('/futbolistas/:idFutbolista', editarFutbolistaId)
 
+//busqueda por apellido
+router.get('/apellido', buscarPorApellido);
 
 module.exports = router;
 
