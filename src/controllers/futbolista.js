@@ -70,9 +70,9 @@ exports.eliminarFutbolista = async (req, res) => {
 };
 
 exports.crearFutbolista = async (req, res) => {
-    const { dni, nombre, apellido, posicion, apodo, foto, piehabil,activo} = req.body;
+    const { dni, nombre, apellido, posicion, apodo,  foto, piehabil} = req.body;
 
-    if (!dni || !nombre || !apellido || !posicion || !apodo || !foto || !piehabil || !activo) {
+    if (!dni || !nombre || !apellido || !posicion || !apodo || !piehabil ) {
         return res.status(404).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
     } else {
 
@@ -83,8 +83,7 @@ exports.crearFutbolista = async (req, res) => {
             posicion,
             apodo,
             foto,
-            piehabil,
-            activo
+            piehabil
         };
 
         try {
@@ -102,7 +101,7 @@ exports.editarFutbolistaId = async (req, res) => {
     const { idFutbolista } = req.params;
     const { dni, nombre,apellido, posicion, apodo, foto, piehabil } = req.body;
   
-    if (!dni ||!nombre ||!apellido || !posicion || !apodo || !foto || !piehabil) {
+    if (!dni ||!nombre ||!apellido || !posicion || !apodo || !piehabil) {
       return res.status(400).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
     }
   

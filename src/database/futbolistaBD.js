@@ -2,18 +2,18 @@ const conexion = require('./conexionBD');
 
 const buscarTodos = async () => {
 
-    const consulta = `SELECT  dni, nombre, apellido,
+    const consulta = `SELECT idFutbolista, dni, nombre, apellido,
     (CASE
-        WHEN posicion = 0 THEN 'arquero'
-        WHEN posicion = 1 THEN 'defensor'
-        WHEN posicion = 2 THEN 'mediocampista'
-        WHEN posicion = 3 THEN 'delantero'
+        WHEN posicion = 0 THEN 'Arquero'
+        WHEN posicion = 1 THEN 'Defensor'
+        WHEN posicion = 2 THEN 'Mediocampista'
+        WHEN posicion = 3 THEN 'Delantero'
         ELSE ''
     END)
     AS posicion, apodo, foto, 
     (CASE
-        WHEN piehabil = 0 THEN 'derecho'
-        WHEN piehabil = 1 THEN 'izquierdo'
+        WHEN piehabil = 0 THEN 'Derecho'
+        WHEN piehabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
     As piehabil 
@@ -29,16 +29,16 @@ const buscarPorId = async (idFutbolista) => {
 
     const consulta = `SELECT  dni, nombre, apellido,
     (CASE
-        WHEN posicion = 0 THEN 'arquero'
-        WHEN posicion = 1 THEN 'defensor'
-        WHEN posicion = 2 THEN 'mediocampista'
-        WHEN posicion = 3 THEN 'delantero'
+        WHEN posicion = 0 THEN 'Arquero'
+        WHEN posicion = 1 THEN 'Defensor'
+        WHEN posicion = 2 THEN 'Mediocampista'
+        WHEN posicion = 3 THEN 'Delantero'
         ELSE ''
     END)
     AS posicion, apodo, foto, 
     (CASE
-        WHEN piehabil = 0 THEN 'derecho'
-        WHEN piehabil = 1 THEN 'izquierdo'
+        WHEN piehabil = 0 THEN 'Derecho'
+        WHEN piehabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
     As piehabil 
@@ -86,8 +86,6 @@ const eliminar = async (idFutbolista) => {
 }
 
 const crear = async (futbolista) => {
-
-
     const consulta = 'INSERT INTO futbolista SET ?';
     const [futbolistaNuevo] = await conexion.query(consulta, futbolista);
 
