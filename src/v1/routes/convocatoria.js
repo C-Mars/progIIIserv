@@ -12,6 +12,10 @@ router.get('/convocatorias/:idConvocatoria', buscarPorIdConvocaroria);
 
 //agregar convocatoria
 
-router.post('/convocatorias',crearConvocatoria);
+router.post('/nueva',crearConvocatoria);
+//Editar
+router.put('/editar/:idConvocatoria', modificar)
+
+
 
 module.exports = router;

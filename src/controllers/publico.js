@@ -29,11 +29,7 @@ exports.enviarCorreo = async(req,res) =>{
     // Renderizo la plantilla con los datos
     const correoHtml = correoTemplate(datos);
   
-    // console.log(nombreyapellido);
-    // console.log(email);
-    // console.log(asunto);
-    // console.log(comentario);
-
+    
     
     /*parra mandar un email 
     se def TRASPORTADOR (correo de envio, clase y servicio)  

@@ -4,9 +4,9 @@ const convocatoriaBD = require('../database/convocatoriaBD')
 
 exports.buscarTodosConvocatoria = async(req, res) => {
     try{
-        const convocatorias = await convocatoriaBD.buscarTodos();
+        const convocatorias = await convocatoriaBD.buscarConvocatoriaTodos();
 
-        res.json({estado:'OK', dato:convocatorias});
+        res.status(200).json({estado:'OK', dato:convocatorias});
 
     }catch (exec){
         throw exec;
@@ -22,9 +22,9 @@ exports.buscarPorIdConvocaroria = async(req, res) => {
             res.status(404).json({estado:'FALLO', msj:'Falta el id'});
         }
 
-        const convocatoria = await convocatoriaBD.buscarPorId(idConvocatoria);
+        const convocatoria = await convocatoriaBD.buscarConvocatoriaPorId(idConvocatoria);
 
-        res.json({estado:'OK', dato:convocatoria});
+        res.status(200).json({estado:'OK', dato:convocatoria});
 
     }catch (exec){
         throw exec;
@@ -35,12 +35,11 @@ exports.crearConvocatoria = async (req, res) => {
 
     const {fecha, rival, golesrecibidos, golesconvertidos} = req.body;
 
-    if(!fecha || !rival || !golesrecibidos || !golesconvertidos){
+    if(!fecha || !rival ){
         res.status(404).json({estado:'FALLA', msj:'Faltan datos obligatorios'});
     }else{
         const convocatoria = {
             fecha:fecha, 
-            //ver como relacionar las tablas
             rival:rival, 
             golesrecibidos:golesrecibidos, 
             golesconvertidos:golesconvertidos, 
@@ -57,4 +56,20 @@ exports.crearConvocatoria = async (req, res) => {
     }
 };
 
-   
+exports.editarConvocatoria = async (req, res) => {
+    const {golesConvertidos, golesRecibidos} = req.body;
+    const {idConvocatoria} = req.params;
+
+    
+    if(!idConvocatoria){
+        res.status(404).json({estado:'FALLO', msj:'faltan datos requeridos'});
+    }else{
+        const dato = {
+            golesConvertidos:golesConvertidos, 
+            golesRecibidos:golesRecibidos
+        }
+
+        const convocatoriaModificada = await convocatoriaBD.modificar(dato, idConvocatoria);
+        res.status(200).json({estado:'OK', msj:'Convocatoria modficada', dato:convocatoriaModificada});
+    }
+} 

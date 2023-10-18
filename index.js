@@ -37,17 +37,20 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }))
 
+
 // Rutas del API
 const v1Publico = require('./src/v1/routes/publico');
 const v1Futbolista = require('./src/v1/routes/futbolista');
-
+const v1Rival = require('./src/v1/routes/rival')
 const v1Convocatoria = require('./src/v1/routes/convocatoria')
+const v1FutbolistaConvocatoria = require('./src/v1/routes/futbolistaConvocatoria');
 
 // middleeare api (use las rutas definidas)
 app.use('/api/v1/publico', v1Publico);
 app.use('/api/v1/futbolista', v1Futbolista);
 app.use('/api/v1/convocatoria', v1Convocatoria);
-
+app.use('/api/v1/rival', v1Rival);
+app.use('/api/v1/futbolistaConvocatoria', v1FutbolistaConvocatoria);
 
 
 
