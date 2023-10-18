@@ -40,6 +40,7 @@ app.use(morgan('combined', { stream: accessLogStream }))
 // Rutas del API
 const v1Publico = require('./src/v1/routes/publico');
 const v1Futbolista = require('./src/v1/routes/futbolista');
+
 const v1Convocatoria = require('./src/v1/routes/convocatoria')
 
 // middleeare api (use las rutas definidas)

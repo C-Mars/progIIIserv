@@ -10,13 +10,13 @@ const buscarTodos = async () => {
         WHEN posicion = 3 THEN 'Delantero'
         ELSE ''
     END)
-    AS posicion, apodo, foto, 
+    AS posicion, apodo, foto,  
     (CASE
         WHEN piehabil = 0 THEN 'Derecho'
         WHEN piehabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As piehabil 
+    As piehabil, false as seleccionado 
     FROM futbolista 
     WHERE activo = 1` ;
 
@@ -41,7 +41,7 @@ const buscarPorId = async (idFutbolista) => {
         WHEN piehabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As piehabil 
+    As piehabil ,false as seleccionado
     FROM futbolista 
     WHERE activo = 1 AND idFutbolista = ?` ;
 

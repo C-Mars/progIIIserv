@@ -77,13 +77,13 @@ exports.crearFutbolista = async (req, res) => {
     } else {
 
         const futbolista = {
-            dni,
-            nombre,
-            apellido,
-            posicion,
-            apodo,
-            foto,
-            piehabil
+            dni:dni,
+            nombre:nombre,
+            apellido:apellido,
+            posicion:posicion,
+            apodo:apodo,
+            foto:foto,
+            piehabil:piehabil
         };
 
         try {
