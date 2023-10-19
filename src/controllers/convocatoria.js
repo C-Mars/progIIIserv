@@ -2,74 +2,75 @@ const convocatoriaBD = require('../database/convocatoriaBD')
 
 
 
-exports.buscarTodosConvocatoria = async(req, res) => {
-    try{
-        const convocatorias = await convocatoriaBD.buscarConvocatoriaTodos();
+exports.buscarTodosConvocatoria = async (req, res) => {
+    try {
+        const convocatorias = await convocatoriaBD.buscarConvocaroriaTodos();
 
-        res.status(200).json({estado:'OK', dato:convocatorias});
+        res.status(200).json({ estado: 'OK', dato: convocatorias });
 
-    }catch (exec){
+    } catch (exec) {
         throw exec;
     };
 
 };
 
-exports.buscarPorIdConvocaroria = async(req, res) => {
-    try{
-        const idConvocatoria = req.params.idConvocatoria;   
-        
-        if(!idConvocatoria) {
-            res.status(404).json({estado:'FALLO', msj:'Falta el id'});
-        }
+exports.buscarPorIdConvocaroria = async (req, res) => {
 
-        const convocatoria = await convocatoriaBD.buscarConvocatoriaPorId(idConvocatoria);
+    const idConvocatoria = req.params.idConvocatoria;
 
-        res.status(200).json({estado:'OK', dato:convocatoria});
+    if (!idConvocatoria) {
+        res.status(404).json({ estado: 'FALLO', msj: 'No se modifico' });
+    } else {
+        try {
 
-    }catch (exec){
-        throw exec;
-    }
-};
+            const convocatoria = await convocatoriaBD.buscarConvocatoriaPorId(idConvocatoria);
 
-exports.crearConvocatoria = async (req, res) => {
+            res.status(200).json({ estado: 'OK', dato: convocatoria });
 
-    const {fecha, rival, golesrecibidos, golesconvertidos} = req.body;
-
-    if(!fecha || !rival ){
-        res.status(404).json({estado:'FALLA', msj:'Faltan datos obligatorios'});
-    }else{
-        const convocatoria = {
-            fecha:fecha, 
-            rival:rival, 
-            golesrecibidos:golesrecibidos, 
-            golesconvertidos:golesconvertidos, 
-        }; 
-
-
-        try{
-            const convocatoriaNuevo = await convocatoriaBD.crear(convocatoria);
-            res.status(201).json({estado:'OK', msj:'Convocatoria creada', dato:convocatoriaNuevo});
-        }catch(error) {
-            console.error(error);
-            res.status(500).json({ estado: 'FALLO', msj: 'Error al crear una nueva convocatoria' });
+        } catch (exec) {
+            throw exec;
         }
     }
-};
+}
+    exports.crearConvocatoria = async (req, res) => {
 
-exports.editarConvocatoria = async (req, res) => {
-    const {golesConvertidos, golesRecibidos} = req.body;
-    const {idConvocatoria} = req.params;
+        const { fecha, rival, golesrecibidos, golesconvertidos } = req.body;
 
-    
-    if(!idConvocatoria){
-        res.status(404).json({estado:'FALLO', msj:'faltan datos requeridos'});
-    }else{
-        const dato = {
-            golesConvertidos:golesConvertidos, 
-            golesRecibidos:golesRecibidos
+        if (!fecha || !rival) {
+            res.status(404).json({ estado: 'FALLA', msj: 'Faltan datos obligatorios' });
+        } else {
+            const convocatoria = {
+                fecha: fecha,
+                rival: rival,
+                golesrecibidos: golesrecibidos,
+                golesconvertidos: golesconvertidos,
+            };
+
+
+            try {
+                const convocatoriaNuevo = await convocatoriaBD.crear(convocatoria);
+                res.status(201).json({ estado: 'OK', msj: 'Convocatoria creada', dato: convocatoriaNuevo });
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ estado: 'FALLO', msj: 'Error al crear una nueva convocatoria' });
+            }
         }
+    };
 
-        const convocatoriaModificada = await convocatoriaBD.modificar(dato, idConvocatoria);
-        res.status(200).json({estado:'OK', msj:'Convocatoria modficada', dato:convocatoriaModificada});
-    }
-} 
+    exports.editarConvocatoria = async (req, res) => {
+        const { golesConvertidos, golesRecibidos } = req.body;
+        const { idConvocatoria } = req.params;
+
+
+        if (!idConvocatoria) {
+            res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
+        } else {
+            const dato = {
+                golesConvertidos: golesConvertidos,
+                golesRecibidos: golesRecibidos
+            }
+
+            const convocatoriaModificada = await convocatoriaBD.modificar(dato, idConvocatoria);
+            res.status(200).json({ estado: 'OK', msj: 'Convocatoria modficada', dato: convocatoriaModificada });
+        }
+    } 

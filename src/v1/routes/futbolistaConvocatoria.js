@@ -1,13 +1,13 @@
 const Router = require('express');
-
-const {nuevaConvFut, FutbolistaConvocatoriaPorIdConvocatoria} = require('../../controllers/futbolistaConvocatoria');
-
-
 const router = Router();
+const {NuevaConvFutb, FutbolistaConvocatoriaPorIdConvocatoria} = require('../../controllers/futbolistaconvocatoria');
+
+
+
 
 //crear nueva convocatoria de futbolistas para una determinada conv
-router.post('/nuevaconvocatoriafutbolista', nuevaConvFut)    
+router.post('/nuevafutbolistaconvocatoria', NuevaConvFutb); 
 //Buscar por id
-router.get('/futbolistaConvocatoria/:idConvocatoria', FutbolistaConvocatoriaPorIdConvocatoria)
+router.get('/futbolistaconvocatoria/:idConvocatoria', FutbolistaConvocatoriaPorIdConvocatoria)
 
 module.exports = router;

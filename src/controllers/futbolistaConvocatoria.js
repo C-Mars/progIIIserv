@@ -1,17 +1,18 @@
-const futbolistasConvocatoriaBD = require('../database/convocatoriaFutbolistaBD');
+const futbolistasConvocatoriaBD = require('../database/futbolistaconvocatoriaBD');
 
 
-exports.nuevaConvFutb  = async (req, res) => {
+const NuevaConvFutb  = async (req, res) => {
     const {idConvocatoria, futbolistas} = req.body;
     try{
         const nuevaLista = await futbolistasConvocatoriaBD.nueva(idConvocatoria,futbolistas);
         res.status(201).json({estado:'OK', msj:'Convocatoria Realizada!'});
+        
     }catch (exec){
         throw exec;
     }
 }
 
-exports.FutbolistaConvocatoriaPorIdConvocatoria = async (req, res) => {
+const FutbolistaConvocatoriaPorIdConvocatoria = async (req, res) => {
     const {idConvocatoria} = req.params;
 
     try{
@@ -23,3 +24,7 @@ exports.FutbolistaConvocatoriaPorIdConvocatoria = async (req, res) => {
 
 }
 
+module.exports={
+    NuevaConvFutb,
+    FutbolistaConvocatoriaPorIdConvocatoria
+}

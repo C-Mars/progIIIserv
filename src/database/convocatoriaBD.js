@@ -5,21 +5,18 @@ const conexion = require('./conexionBD');
 
 const buscarConvocaroriaTodos = async () => {
 
-    const consulta = `SELECT fecha, nombre, rival, golesrecibidos, golesconvertidos 
-    FROM convocatoria INNER JOIN rival As r
-    ON convocatoria.rival= rival.idRival`;
+    const consulta = `SELECT * FROM convocatoria as c INNER JOIN rival AS r ON r.idRival = c.rival`;
 
-    const [convocatorias] = await conexion.query(consulta);
+    const [convocatorias] = await conexion.query(consulta);    
 
     return convocatorias;
 };
 
 const buscarConvocatoriaPorId = async (idConvocatoria) => {
 
-    const consulta = `SELECT fecha, nombre, rival, golesrecibidos, golesconvertidos 
-    FROM convocatoria INNER JOIN rival 
-    ON convocatoria.rival= rival.idRival
-    AND idConvocatoria = ?` ;
+    const consulta = `SELECT * FROM convocatoria as c
+                        INNER JOIN rival AS r ON r.idRival = c.rival
+                        WHERE c.idConvocatoria = ?`;
 
     const [convocatoria] = await conexion.query(consulta, idConvocatoria);
 
