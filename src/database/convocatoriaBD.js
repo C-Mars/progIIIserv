@@ -3,7 +3,7 @@ const conexion = require('./conexionBD');
 
 
 
-const buscarConvocaroriaTodos = async () => {
+const buscarTodosConvocaroria = async () => {
 
     const consulta = `SELECT * FROM convocatoria as c INNER JOIN rival AS r ON r.idRival = c.rival`;
 
@@ -44,7 +44,7 @@ const editarConvocatoria = async (dato, idConvocatoria) => {
 
 
     module.exports = {
-        buscarConvocaroriaTodos,
+        buscarTodosConvocaroria,
         buscarConvocatoriaPorId,
         crearConvocatoria,
         editarConvocatoria

@@ -4,7 +4,7 @@ const convocatoriaBD = require('../database/convocatoriaBD')
 
 exports.buscarTodosConvocatoria = async (req, res) => {
     try {
-        const convocatorias = await convocatoriaBD.buscarConvocaroriaTodos();
+        const convocatorias = await convocatoriaBD.buscarTodosConvocaroria();
 
         res.status(200).json({ estado: 'OK', dato: convocatorias });
 
@@ -48,7 +48,7 @@ exports.buscarPorIdConvocaroria = async (req, res) => {
 
 
             try {
-                const convocatoriaNuevo = await convocatoriaBD.crear(convocatoria);
+                const convocatoriaNuevo = await convocatoriaBD.crearConvocatoria(convocatoria);
                 res.status(201).json({ estado: 'OK', msj: 'Convocatoria creada', dato: convocatoriaNuevo });
             } catch (error) {
                 console.error(error);
