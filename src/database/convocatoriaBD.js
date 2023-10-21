@@ -5,7 +5,7 @@ const conexion = require('./conexionBD');
 
 const buscarTodosConvocaroria = async () => {
 
-    const consulta = `SELECT * FROM convocatoria as c INNER JOIN rival AS r ON r.idRival = c.rival`;
+    const consulta = `SELECT * FROM convocatoria as c INNER JOIN rival AS r ON r.idRival = c.rival WHERE c.activo = 1`;
 
     const [convocatorias] = await conexion.query(consulta);    
 
@@ -16,7 +16,7 @@ const buscarConvocatoriaPorId = async (idConvocatoria) => {
 
     const consulta = `SELECT * FROM convocatoria as c
                         INNER JOIN rival AS r ON r.idRival = c.rival
-                        WHERE c.idConvocatoria = ?`;
+                        WHERE c.activo = 1 AND c.idConvocatoria = ?`;
 
     const [convocatoria] = await conexion.query(consulta, idConvocatoria);
 
@@ -42,10 +42,15 @@ const editarConvocatoria = async (dato, idConvocatoria) => {
     return buscarConvocatoriaPorId(idConvocatoria)
 }
 
+const eliminarConvocatoria = async (idConvocatoria) => {
+    const consulta = 'UPDATE convocatoria SET activo = 0 WHERE idConvocatoria = ?';
+    await conexion.query(consulta, [idConvocatoria]);    
+}
 
     module.exports = {
         buscarTodosConvocaroria,
         buscarConvocatoriaPorId,
         crearConvocatoria,
-        editarConvocatoria
+        editarConvocatoria,
+        eliminarConvocatoria
     }

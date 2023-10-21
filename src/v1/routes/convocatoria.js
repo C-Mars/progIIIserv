@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = Router(); 
 
-const {buscarTodosConvocatoria,crearConvocatoria, buscarPorIdConvocaroria,editarConvocatoria} = require('../../controllers/convocatoria')
+const {buscarTodosConvocatoria,crearConvocatoria, buscarPorIdConvocaroria,editarConvocatoria,eliminarConvocatoria} = require('../../controllers/convocatoria');
+
 //Buscar convocatorias
 
 router.get('/convocatorias', buscarTodosConvocatoria)
@@ -14,7 +15,9 @@ router.get('/convocatorias/:idConvocatoria', buscarPorIdConvocaroria);
 
 router.post('/nuevaconvocatoria',crearConvocatoria);
 //Editar
-router.put('/editar/:idConvocatoria', editarConvocatoria)
+router.put('/convocatorias/:idConvocatoria', editarConvocatoria)
+//Eliminar Convocaroria
+router.delete('/convocatorias/:idConvocatoria',eliminarConvocatoria)
 
 
 

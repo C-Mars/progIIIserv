@@ -74,3 +74,18 @@ exports.buscarPorIdConvocaroria = async (req, res) => {
             res.status(200).json({ estado: 'OK', msj: 'Convocatoria modficada', dato: convocatoriaModificada });
         }
     } 
+
+    exports.eliminarConvocatoria = async (req, res) => {
+        const idConvocatoria = req.params.idConvocatoria;
+    
+        if (!idConvocatoria) {
+            res.status(404).json({ estado: 'FALLO', msj: 'no se especifico el id del Convocatoria' });
+        } else {
+            try {
+                await convocatoriaBD.eliminarConvocatoria(idConvocatoria);
+                res.status(200).json({ estado: 'OK', msj: 'Convocatoria eliminada' });
+            } catch (error) {
+                throw exec;
+            }
+        }
+    };
