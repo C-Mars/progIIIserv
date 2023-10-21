@@ -1,10 +1,10 @@
-const futbolistasConvocatoriaBD = require('../database/futbolistaconvocatoriaBD');
+const futbolistaConvocatoriaBD = require('../database/futbolistaconvocatoriaBD');
 
 
 const NuevaConvFutb  = async (req, res) => {
     const {idConvocatoria, futbolistas} = req.body;
     try{
-        const nuevaLista = await futbolistasConvocatoriaBD.nueva(idConvocatoria,futbolistas);
+        const nuevaLista = await futbolistaConvocatoriaBD.nuevaConvFut(idConvocatoria,futbolistas);
         res.status(201).json({estado:'OK', msj:'Convocatoria Realizada!'});
         
     }catch (exec){
@@ -16,7 +16,7 @@ const FutbolistaConvocatoriaPorIdConvocatoria = async (req, res) => {
     const {idConvocatoria} = req.params;
 
     try{
-        const convocados = await futbolistasConvocatoriaBD.FutbolistaConvocatoriaPorIdConvocatoria(idConvocatoria);
+        const convocados = await futbolistaConvocatoriaBD.FutbolistaConvocatoriaPorIdConvocatoria(idConvocatoria);
         res.status(201).json({estado:'OK', dato:convocados});
     }catch (exec){
         throw exec;
