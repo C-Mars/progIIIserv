@@ -39,7 +39,11 @@ const editarConvocatoria = async (dato, idConvocatoria) => {
 
     const [result] = await conexion.query(consulta, [dato, idConvocatoria]);
 
-    return buscarConvocatoriaPorId(idConvocatoria)
+    return (
+        
+        buscarConvocatoriaPorId(idConvocatoria)
+    )
+
 }
 
 const eliminarConvocatoria = async (idConvocatoria) => {

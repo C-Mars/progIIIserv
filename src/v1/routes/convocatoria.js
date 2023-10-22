@@ -15,7 +15,7 @@ router.get('/convocatorias/:idConvocatoria', buscarPorIdConvocaroria);
 
 router.post('/nuevaconvocatoria',crearConvocatoria);
 //Editar
-router.put('/convocatorias/:idConvocatoria', editarConvocatoria)
+router.put('/esditarconvocatoria/:idConvocatoria', editarConvocatoria)
 //Eliminar Convocaroria
 router.delete('/convocatorias/:idConvocatoria',eliminarConvocatoria)
 

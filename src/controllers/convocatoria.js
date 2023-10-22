@@ -58,7 +58,25 @@ exports.buscarPorIdConvocaroria = async (req, res) => {
     };
 
     exports.editarConvocatoria = async (req, res) => {
+        const { fecha, rival } = req.body;
+        const idConvocatoria = req.params.idConvocatoria;
+
+
+        if (!idConvocatoria) {
+            res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
+        } else {
+            const dato = {
+               fecha: fecha,
+                rival: rival
+            }
+
+            const convocatoriaModificada = await convocatoriaBD.editarConvocatoria(dato, idConvocatoria);
+            res.status(200).json({ estado: 'OK', msj: 'Convocatoria modficada', dato: convocatoriaModificada });
+        }
+    } 
+    exports.editarConvocatoriaResultados = async (req, res) => {
         const { golesConvertidos, golesRecibidos } = req.body;
+        
         const { idConvocatoria } = req.params;
 
 
@@ -70,7 +88,7 @@ exports.buscarPorIdConvocaroria = async (req, res) => {
                 golesRecibidos: golesRecibidos
             }
 
-            const convocatoriaModificada = await convocatoriaBD.modificar(dato, idConvocatoria);
+            const convocatoriaModificada = await convocatoriaBD.editarConvocatoria(dato, idConvocatoria);
             res.status(200).json({ estado: 'OK', msj: 'Convocatoria modficada', dato: convocatoriaModificada });
         }
     } 
