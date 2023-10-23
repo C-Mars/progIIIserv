@@ -98,35 +98,30 @@ exports.crearFutbolista = async (req, res) => {
 
 // Editar un futbolista por ID
 exports.editarFutbolistaId = async (req, res) => {
-    const { idFutbolista } = req.params;
-    const { dni, nombre,apellido, posicion, apodo, foto, piehabil } = req.body;
+    const idFutbolista  = req.params.idFutbolista
+    const  { dni, nombre, apellido, posicion, apodo,  foto, piehabil} = req.body;
   
-    if (!dni ||!nombre ||!apellido || !posicion || !apodo || !piehabil) {
-      return res.status(400).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
-    }
-  
-    try {
-      const futbolistaActualizado = await futbolistaBD.editarPorId(idFutbolista, {
-        dni,
-        nombre,
-        apellido,
-        posicion,
-        apodo,
-        foto,
-        piehabil
-      });
-  
-      if (futbolistaActualizado) {
-        res.status(200).json({ estado: 'OK', msj: 'Futbolista actualizado', dato: futbolistaActualizado });
-      } else {
-        res.status(404).json({ estado: 'FALLO', msj: 'Futbolista no encontrado' });
-      }
-    } catch (error) {
+    if (!idFutbolista) {
+      return res.status(404).json({ estado: 'FALLO', msj: 'Futbolista no encontrado' });
+    } else {
+        const futbolista = {
+            dni: dni,
+            nombre: nombre,
+            apellido: apellido,
+            posicion: posicion,
+            apodo: apodo,
+            foto: foto,
+            piehabil: piehabil
+        };
+      try{
+      const futbolistaActualizado = await futbolistaBD.editarPorId(futbolista,idFutbolista);
+      res.status(201).json({ estado: 'OK', msj: 'Futbolista actualizado', dato: futbolistaActualizado });
+      } catch (error) {
       console.error(error);
       res.status(500).json({ estado: 'FALLO', msj: 'Error al actualizar el futbolista' });
     }
-  };
-
+  }
+};
 
 
 

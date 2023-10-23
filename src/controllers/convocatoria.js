@@ -63,7 +63,7 @@ exports.buscarPorIdConvocaroria = async (req, res) => {
 
 
         if (!idConvocatoria) {
-            res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
+            res.status(404).json({ estado: 'FALLO', msj: 'Faltan datos requeridos' });
         } else {
             const dato = {
                fecha: fecha,
@@ -74,6 +74,7 @@ exports.buscarPorIdConvocaroria = async (req, res) => {
             res.status(200).json({ estado: 'OK', msj: 'Convocatoria modficada', dato: convocatoriaModificada });
         }
     } 
+    
     exports.editarConvocatoriaResultados = async (req, res) => {
         const { golesConvertidos, golesRecibidos } = req.body;
         

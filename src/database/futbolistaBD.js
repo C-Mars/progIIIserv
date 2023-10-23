@@ -12,11 +12,11 @@ const buscarTodos = async () => {
     END)
     AS posicion, apodo, foto,  
     (CASE
-        WHEN piehabil = 0 THEN 'Derecho'
-        WHEN piehabil = 1 THEN 'Izquierdo'
+        WHEN pieHabil = 0 THEN 'Derecho'
+        WHEN pieHabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As piehabil, false as seleccionado 
+    As pieHabil, false As seleccionado 
     FROM futbolista 
     WHERE activo = 1` ;
 
@@ -27,7 +27,7 @@ const buscarTodos = async () => {
 
 const buscarPorId = async (idFutbolista) => {
 
-    const consulta = `SELECT  dni, nombre, apellido,
+    const consulta = `SELECT   idFutbolista,dni, nombre, apellido,
     (CASE
         WHEN posicion = 0 THEN 'Arquero'
         WHEN posicion = 1 THEN 'Defensor'
@@ -37,11 +37,11 @@ const buscarPorId = async (idFutbolista) => {
     END)
     AS posicion, apodo, foto, 
     (CASE
-        WHEN piehabil = 0 THEN 'Derecho'
-        WHEN piehabil = 1 THEN 'Izquierdo'
+        WHEN pieHabil = 0 THEN 'Derecho'
+        WHEN pieHabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As piehabil ,false as seleccionado
+    As pieHabil , false As seleccionado 
     FROM futbolista 
     WHERE activo = 1 AND idFutbolista = ?` ;
 
@@ -62,10 +62,10 @@ const buscarPorApellido = async (apellido) => {
                 ELSE ''
             END) AS posicion, apodo, foto,
             (CASE
-                WHEN piehabil = 0 THEN 'derecho'
-                WHEN piehabil = 1 THEN 'izquierdo'
+                WHEN pieHabil = 0 THEN 'derecho'
+                WHEN pieHabil = 1 THEN 'izquierdo'
                 ELSE ''
-            END) AS piehabil
+            END) AS pieHabil
             FROM futbolista
             WHERE apellido LIKE ? AND activo = 1`;
 
@@ -81,12 +81,12 @@ const buscarPorApellido = async (apellido) => {
 }
 
 const eliminar = async (idFutbolista) => {
-    const consulta = 'UPDATE futbolista SET activo = 0 WHERE idFutbolista = ?';
+    const consulta = `UPDATE futbolista SET activo = 0 WHERE idFutbolista = ?`;
     await conexion.query(consulta, [idFutbolista]);    
 }
 
 const crear = async (futbolista) => {
-    const consulta = 'INSERT INTO futbolista SET ?';
+    const consulta = `INSERT INTO futbolista SET ?`;
     const [futbolistaNuevo] = await conexion.query(consulta, futbolista);
 
     // console.log(futbolistaNuevo.insertId);
@@ -95,18 +95,18 @@ const crear = async (futbolista) => {
 };
 
 const editar = async (idFutbolista) => {
-    const consulta = 'UPDATE futbolista SET activo = 0 WHERE idFutbolista = ?';
+    const consulta = `UPDATE futbolista SET activo = 1 WHERE idFutbolista = ?`;
     await conexion.query(consulta, [idFutbolista]);    
 }
 // Editar un futbolista por ID
-const editarPorId = async (id, nuevosDatos) => {
-  const consulta = 'UPDATE futbolista SET ? WHERE idFutbolista = ?';
-  const [resultado] = await conexion.query(consulta, [nuevosDatos, id]);
+const editarPorId = async (nuevosDatos,idFutbolista) => {
+  const consulta = `UPDATE futbolista SET ? WHERE idFutbolista = ?`;
+  const [resultado] = await conexion.query(consulta, [nuevosDatos,idFutbolista]);
 
   if (resultado.affectedRows > 0) {
-    return buscarPorId(id);
+    return buscarPorId(idFutbolista);
   } else {
-    return null; // Futbolista no encontrado
+    return null; 
   }
 };
 
