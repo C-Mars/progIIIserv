@@ -12,11 +12,11 @@ const buscarTodos = async () => {
     END)
     AS posicion, apodo, foto,  
     (CASE
-        WHEN pieHabil = 0 THEN 'Derecho'
-        WHEN pieHabil = 1 THEN 'Izquierdo'
+        WHEN piehabil = 0 THEN 'Derecho'
+        WHEN piehabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As pieHabil, false As seleccionado 
+    As piehabil, false As seleccionado 
     FROM futbolista 
     WHERE activo = 1` ;
 
@@ -37,11 +37,11 @@ const buscarPorId = async (idFutbolista) => {
     END)
     AS posicion, apodo, foto, 
     (CASE
-        WHEN pieHabil = 0 THEN 'Derecho'
-        WHEN pieHabil = 1 THEN 'Izquierdo'
+        WHEN piehabil = 0 THEN 'Derecho'
+        WHEN piehabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As pieHabil , false As seleccionado 
+    As piehabil , false As seleccionado 
     FROM futbolista 
     WHERE activo = 1 AND idFutbolista = ?` ;
 
@@ -62,10 +62,10 @@ const buscarPorApellido = async (apellido) => {
                 ELSE ''
             END) AS posicion, apodo, foto,
             (CASE
-                WHEN pieHabil = 0 THEN 'derecho'
-                WHEN pieHabil = 1 THEN 'izquierdo'
+                WHEN piehabil = 0 THEN 'derecho'
+                WHEN piehabil = 1 THEN 'izquierdo'
                 ELSE ''
-            END) AS pieHabil
+            END) AS piehabil
             FROM futbolista
             WHERE apellido LIKE ? AND activo = 1`;
 
@@ -95,12 +95,12 @@ const crear = async (futbolista) => {
 };
 
 const editar = async (idFutbolista) => {
-    const consulta = `UPDATE futbolista SET activo = 1 WHERE idFutbolista = ?`;
+    const consulta = 'UPDATE futbolista SET activo = 1 WHERE idFutbolista = ?';
     await conexion.query(consulta, [idFutbolista]);    
 }
 // Editar un futbolista por ID
 const editarPorId = async (nuevosDatos,idFutbolista) => {
-  const consulta = `UPDATE futbolista SET ? WHERE idFutbolista = ?`;
+  const consulta = 'UPDATE futbolista SET ?  WHERE idFutbolista = ?';
   const [resultado] = await conexion.query(consulta, [nuevosDatos,idFutbolista]);
 
   if (resultado.affectedRows > 0) {

@@ -23,7 +23,7 @@ router
     .delete('/futbolistas/:idFutbolista', eliminarFutbolista)
 
 //modificar Futbolista ID
-    .put('/editar/:idFutbolista', editarFutbolistaId);
+    .put('/futbolistas/:idFutbolista', editarFutbolistaId);
 
 
 

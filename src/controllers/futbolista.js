@@ -69,21 +69,22 @@ exports.eliminarFutbolista = async (req, res) => {
     }
 };
 
-exports.crearFutbolista = async (req, res) => {
-    const { dni, nombre, apellido, posicion, apodo,  foto, piehabil} = req.body;
 
-    if (!dni || !nombre || !apellido || !posicion || !apodo || !piehabil ) {
+exports.crearFutbolista = async (req, res) => {
+    const { dni, nombre, apellido, posicion, apodo, foto, pieHabil} = req.body;
+
+    if (!dni || !nombre || !apellido || !posicion || !apodo || !pieHabil) {
         return res.status(404).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
     } else {
 
         const futbolista = {
-            dni:dni,
-            nombre:nombre,
-            apellido:apellido,
-            posicion:posicion,
-            apodo:apodo,
-            foto:foto,
-            piehabil:piehabil
+            dni,
+            nombre,
+            apellido,
+            posicion,
+            apodo,
+            foto,
+            pieHabil
         };
 
         try {
@@ -98,31 +99,37 @@ exports.crearFutbolista = async (req, res) => {
 
 // Editar un futbolista por ID
 exports.editarFutbolistaId = async (req, res) => {
-    const idFutbolista  = req.params.idFutbolista
-    const  { dni, nombre, apellido, posicion, apodo,  foto, piehabil} = req.body;
+    const { idFutbolista } = req.params;
+    const { dni, nombre, apellido, posicion, apodo, foto, pieHabil } = req.body;
   
-    if (!idFutbolista) {
-      return res.status(404).json({ estado: 'FALLO', msj: 'Futbolista no encontrado' });
+    if (!dni ||!nombre ||!apellido || !posicion || !apodo ||!pieHabil) {
+      return res.status(400).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
+    }
+  
+    try {
+      const futbolista = {
+        dni,
+        nombre,
+        apellido,
+        posicion,
+        apodo,
+        foto,
+        pieHabil
+      };
+      const futbolistaActualizado = await futbolistaBD.editarPorId(futbolista,idFutbolista)
+      if (futbolistaActualizado) {
+        
+        res.status(200).json({ estado: 'OK', msj: 'Futbolista actualizado', dato: futbolistaActualizado });
+      
     } else {
-        const futbolista = {
-            dni: dni,
-            nombre: nombre,
-            apellido: apellido,
-            posicion: posicion,
-            apodo: apodo,
-            foto: foto,
-            piehabil: piehabil
-        };
-      try{
-      const futbolistaActualizado = await futbolistaBD.editarPorId(futbolista,idFutbolista);
-      res.status(201).json({ estado: 'OK', msj: 'Futbolista actualizado', dato: futbolistaActualizado });
-      } catch (error) {
+       
+        res.status(404).json({ estado: 'FALLO', msj: 'Futbolista no encontrado' });
+      
+    }
+    } catch (error) {
       console.error(error);
       res.status(500).json({ estado: 'FALLO', msj: 'Error al actualizar el futbolista' });
     }
-  }
-};
-
-
+  };
 
 
