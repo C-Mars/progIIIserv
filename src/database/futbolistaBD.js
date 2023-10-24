@@ -12,11 +12,11 @@ const buscarTodos = async () => {
     END)
     AS posicion, apodo, foto,  
     (CASE
-        WHEN piehabil = 0 THEN 'Derecho'
-        WHEN piehabil = 1 THEN 'Izquierdo'
+        WHEN pieHabil = 0 THEN 'Derecho'
+        WHEN pieHabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As piehabil, false As seleccionado 
+    As pieHabil, false As seleccionado 
     FROM futbolista 
     WHERE activo = 1` ;
 
@@ -37,11 +37,11 @@ const buscarPorId = async (idFutbolista) => {
     END)
     AS posicion, apodo, foto, 
     (CASE
-        WHEN piehabil = 0 THEN 'Derecho'
-        WHEN piehabil = 1 THEN 'Izquierdo'
+        WHEN pieHabil = 0 THEN 'Derecho'
+        WHEN pieHabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As piehabil , false As seleccionado 
+    As pieHabil , false As seleccionado 
     FROM futbolista 
     WHERE activo = 1 AND idFutbolista = ?` ;
 
@@ -62,10 +62,10 @@ const buscarPorApellido = async (apellido) => {
                 ELSE ''
             END) AS posicion, apodo, foto,
             (CASE
-                WHEN piehabil = 0 THEN 'derecho'
-                WHEN piehabil = 1 THEN 'izquierdo'
+                WHEN pieHabil = 0 ThEN 'derecho'
+                WHEN pieHabil = 1 THEN 'izquierdo'
                 ELSE ''
-            END) AS piehabil
+            END) AS pieHabil
             FROM futbolista
             WHERE apellido LIKE ? AND activo = 1`;
 
