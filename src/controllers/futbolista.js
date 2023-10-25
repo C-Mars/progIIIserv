@@ -51,11 +51,9 @@ exports.buscarPorApellido = async (req, res) => {
         res.json({ estado: 'OK', datos: futbolistas });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ estado: 'FALLO', msj: 'Error al buscar futbolistas' });
-    }
+        res.status(500).json({ estado: 'FALLO', msj: 'Error al buscar futbolistas' });
+    }
 };
-
-
 
 exports.eliminarFutbolista = async (req, res) => {
     const idFutbolista = req.params.idFutbolista;

@@ -7,22 +7,21 @@ const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutboli
 
 
 //Buscar Futbolista  
-
  router.get('/futbolistas', buscarFutbolista);
 //Buscar Futbolista  Por ID
 router.get('/futbolistas/:idFutbolista', buscarPorIdFutbolista)
  
-//busqueda por apellido
-router.get('/apellido', buscarPorApellido)
+//busqueda por Apellido
+router.get('/apellido/:apellido', buscarPorApellido)
 
-//agregar  Futbolista
+//Agregar  Futbolista
 
 router.post('/futbolistas', crearFutbolista)
 
 //eliminar Futbolista
 router.delete('/futbolistas/:idFutbolista', eliminarFutbolista)
 
-//modificar Futbolista ID
+//Modificar Futbolista ID
 router.put('/futbolistas/:idFutbolista', editarFutbolistaId);
 
 
