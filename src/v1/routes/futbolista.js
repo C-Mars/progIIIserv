@@ -7,23 +7,23 @@ const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutboli
 
 
 //Buscar Futbolista  
-router
-    .get('/futbolistas', buscarFutbolista)
+
+ router.get('/futbolistas', buscarFutbolista);
 //Buscar Futbolista  Por ID
-    .get('/futbolistas/:idFutbolista', buscarPorIdFutbolista)
+router.get('/futbolistas/:idFutbolista', buscarPorIdFutbolista)
  
 //busqueda por apellido
-    .get('/apellido', buscarPorApellido)
+router.get('/apellido', buscarPorApellido)
 
 //agregar  Futbolista
 
-    .post('/futbolistas', crearFutbolista)
+router.post('/futbolistas', crearFutbolista)
 
 //eliminar Futbolista
-    .delete('/futbolistas/:idFutbolista', eliminarFutbolista)
+router.delete('/futbolistas/:idFutbolista', eliminarFutbolista)
 
 //modificar Futbolista ID
-    .put('/futbolistas/:idFutbolista', editarFutbolistaId);
+router.put('/futbolistas/:idFutbolista', editarFutbolistaId);
 
 
 

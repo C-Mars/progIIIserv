@@ -16,14 +16,15 @@ exports.buscarFutbolista = async (req, res) => {
 };
 
 exports.buscarPorIdFutbolista = async (req, res) => {
-    
+
     try {
         const idFutbolista = req.params.idFutbolista;
         if (!idFutbolista) {
 
             res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });
 
-        } else {const futbolista = await futbolistaBD.buscarPorId(idFutbolista);
+        } else {
+            const futbolista = await futbolistaBD.buscarPorId(idFutbolista);
             res.json({ estado: 'OK', dato: futbolista });
         }
 
@@ -35,7 +36,7 @@ exports.buscarPorIdFutbolista = async (req, res) => {
 
 exports.buscarPorApellido = async (req, res) => {
     try {
-        const apellidoABuscar = req.query.apellido;
+        const apellidoABuscar = req.params.apellido; // Cambia req.query a req.params
 
         if (!apellidoABuscar) {
             return res.status(400).json({ estado: 'FALLO', msj: 'Debes proporcionar un apellido para la búsqueda' });
@@ -54,6 +55,8 @@ exports.buscarPorApellido = async (req, res) => {
     }
 };
 
+
+
 exports.eliminarFutbolista = async (req, res) => {
     const idFutbolista = req.params.idFutbolista;
 
@@ -71,20 +74,21 @@ exports.eliminarFutbolista = async (req, res) => {
 
 
 exports.crearFutbolista = async (req, res) => {
-    const { dni, nombre, apellido, posicion, apodo, foto, pieHabil} = req.body;
+    const { dni, nombre, apellido, posicion, apodo, pieHabil, foto } = req.body;
 
     if (!dni || !nombre || !apellido || !posicion || !apodo || !pieHabil) {
         return res.status(404).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
     } else {
 
         const futbolista = {
-            dni,
-            nombre,
-            apellido,
-            posicion,
-            apodo,
-            foto,
-            pieHabil
+            dni: dni,
+            nombre: nombre,
+            apellido: apellido,
+            posicion: posicion,
+            apodo: apodo,
+            pieHabil: pieHabil,
+            foto: foto
+           
         };
 
         try {
@@ -101,35 +105,35 @@ exports.crearFutbolista = async (req, res) => {
 exports.editarFutbolistaId = async (req, res) => {
     const { idFutbolista } = req.params;
     const { dni, nombre, apellido, posicion, apodo, foto, pieHabil } = req.body;
-  
-    if (!dni ||!nombre ||!apellido || !posicion || !apodo ||!pieHabil) {
-      return res.status(400).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
+
+    if (!dni || !nombre || !apellido || !posicion || !apodo || !pieHabil) {
+        return res.status(400).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
     }
-  
+
     try {
-      const futbolista = {
-        dni,
-        nombre,
-        apellido,
-        posicion,
-        apodo,
-        foto,
-        pieHabil
-      };
-      const futbolistaActualizado = await futbolistaBD.editarPorId(futbolista,idFutbolista)
-      if (futbolistaActualizado) {
-        
-        res.status(200).json({ estado: 'OK', msj: 'Futbolista actualizado', dato: futbolistaActualizado });
-      
-    } else {
-       
-        res.status(404).json({ estado: 'FALLO', msj: 'Futbolista no encontrado' });
-      
-    }
+        const futbolista = {
+            dni,
+            nombre,
+            apellido,
+            posicion,
+            apodo,
+            foto,
+            pieHabil
+        };
+        const futbolistaActualizado = await futbolistaBD.editarPorId(futbolista, idFutbolista)
+        if (futbolistaActualizado) {
+
+            res.status(200).json({ estado: 'OK', msj: 'Futbolista actualizado', dato: futbolistaActualizado });
+
+        } else {
+
+            res.status(404).json({ estado: 'FALLO', msj: 'Futbolista no encontrado' });
+
+        }
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ estado: 'FALLO', msj: 'Error al actualizar el futbolista' });
-    }
-  };
+        console.error(error);
+        res.status(500).json({ estado: 'FALLO', msj: 'Error al actualizar el futbolista' });
+    }
+};
 
 
