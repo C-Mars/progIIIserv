@@ -5,7 +5,8 @@ const conexion = require('./conexionBD');
 
 const buscarTodosConvocaroria = async () => {
 
-    const consulta = `SELECT * FROM convocatoria as c INNER JOIN rival AS r ON r.idRival = c.rival WHERE c.activo = 1`;
+    const consulta = `SELECT * FROM convocatoria as 
+    c INNER JOIN rival AS r ON r.idRival = c.rival WHERE c.activo = 1`;
 
     const [convocatorias] = await conexion.query(consulta);    
 
@@ -26,7 +27,7 @@ const buscarConvocatoriaPorId = async (idConvocatoria) => {
 const crearConvocatoria = async (convocatoria) => {
 
 
-    const consulta = 'INSERT INTO convocatoria SET ?';
+    const consulta = `INSERT INTO convocatoria SET ?`;
     const [convocatoriaNuevo] = await conexion.query(consulta, convocatoria);
 
     // console.log(convocatoriaNuevo.insertId);
@@ -34,10 +35,23 @@ const crearConvocatoria = async (convocatoria) => {
     return buscarConvocatoriaPorId(convocatoriaNuevo.insertId);
 };
 
-const editarConvocatoria = async (dato, idConvocatoria) => {
-    const consulta = 'UPDATE convocatoria SET ? WHERE idConvocatoria = ?';
+const editarConvocatoria = async (convocatoria, idConvocatoria) => {
 
-    const [result] = await conexion.query(consulta, [dato, idConvocatoria]);
+    const consulta = `UPDATE convocatoria SET fecha='${convocatoria.fecha}', rival= '${convocatoria.rival}' WHERE idConvocatoria = '${idConvocatoria}' AND  convocatoria.activo = 1`
+    ;
+
+    const [result] = await conexion.query(consulta, [convocatoria, idConvocatoria]);
+
+    return (
+        
+        buscarConvocatoriaPorId(idConvocatoria)
+    )
+
+}
+const editarResultados = async (convocatoria, idConvocatoria) => {
+    const consulta = `UPDATE convocatoria SET golesRecibidos = '${convocatoria.golesRecibidos}', golesConvertidos = '${convocatoria.golesConvertidos}' WHERE idConvocatoria = '${idConvocatoria}'`;
+
+    const [result] = await conexion.query(consulta, [convocatoria, idConvocatoria]);
 
     return (
         
@@ -56,5 +70,6 @@ const eliminarConvocatoria = async (idConvocatoria) => {
         buscarConvocatoriaPorId,
         crearConvocatoria,
         editarConvocatoria,
-        eliminarConvocatoria
+        eliminarConvocatoria,
+        editarResultados
     }
