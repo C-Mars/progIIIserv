@@ -2,7 +2,7 @@ const conexion = require('./conexionBD');
 
 const buscarTodos = async () => {
 
-    const consulta = `SELECT idFutbolista, dni, nombre, apellido,
+    const consulta = `SELECT idFutbolista, nombre, apellido, dni, apodo,
     (CASE
         WHEN posicion = 0 THEN 'Arquero'
         WHEN posicion = 1 THEN 'Defensor'
@@ -10,13 +10,13 @@ const buscarTodos = async () => {
         WHEN posicion = 3 THEN 'Delantero'
         ELSE ''
     END)
-    AS posicion, apodo, foto,  
+    AS posicion,   
     (CASE
         WHEN pieHabil = 0 THEN 'Derecho'
         WHEN pieHabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As pieHabil, false As seleccionado 
+    As pieHabil, foto, false As seleccionado 
     FROM futbolista 
     WHERE activo = 1` ;
 
@@ -27,7 +27,7 @@ const buscarTodos = async () => {
 
 const buscarPorId = async (idFutbolista) => {
 
-    const consulta = `SELECT   idFutbolista,dni, nombre, apellido,
+    const consulta = `SELECT   idFutbolista , nombre, apellido, dni, apodo,
     (CASE
         WHEN posicion = 0 THEN 'Arquero'
         WHEN posicion = 1 THEN 'Defensor'
@@ -35,13 +35,13 @@ const buscarPorId = async (idFutbolista) => {
         WHEN posicion = 3 THEN 'Delantero'
         ELSE ''
     END)
-    AS posicion, apodo, foto, 
+    AS posicion,   
     (CASE
         WHEN pieHabil = 0 THEN 'Derecho'
         WHEN pieHabil = 1 THEN 'Izquierdo'
         ELSE ''
     END)
-    As pieHabil , false As seleccionado 
+    As pieHabil , foto, false As seleccionado 
     FROM futbolista 
     WHERE activo = 1 AND idFutbolista = ?` ;
 
@@ -55,15 +55,15 @@ const buscarPorApellido = async (apellido) => {
         const consulta = `
             SELECT dni, nombre, apellido,
             (CASE
-                WHEN posicion = 0 THEN 'arquero'
-                WHEN posicion = 1 THEN 'defensor'
-                WHEN posicion = 2 THEN 'mediocampista'
-                WHEN posicion = 3 THEN 'delantero'
+                WHEN posicion = 0 THEN 'Arquero'
+                WHEN posicion = 1 THEN 'Defensor'
+                WHEN posicion = 2 THEN 'Mediocampista'
+                WHEN posicion = 3 THEN 'Delantero'
                 ELSE ''
             END) AS posicion, apodo, foto,
             (CASE
-                WHEN pieHabil = 0 ThEN 'derecho'
-                WHEN pieHabil = 1 THEN 'izquierdo'
+                WHEN pieHabil = 0 ThEN 'Derecho'
+                WHEN pieHabil = 1 THEN 'Izquierdo'
                 ELSE ''
             END) AS pieHabil
             FROM futbolista
@@ -95,12 +95,12 @@ const crear = async (futbolista) => {
 };
 
 const editar = async (idFutbolista) => {
-    const consulta = 'UPDATE futbolista SET activo = 1 WHERE idFutbolista = ?';
+    const consulta = 'UPDATE futbolista SET ? WHERE  activo = 1 AND idFutbolista = ?';
     await conexion.query(consulta, [idFutbolista]);    
 }
 // Editar un futbolista por ID
 const editarPorId = async (nuevosDatos,idFutbolista) => {
-  const consulta = 'UPDATE futbolista SET ?  WHERE idFutbolista = ?';
+  const consulta = 'UPDATE futbolista SET ?  WHERE activo = 1 AND idFutbolista = ?';
   const [resultado] = await conexion.query(consulta, [nuevosDatos,idFutbolista]);
 
   if (resultado.affectedRows > 0) {

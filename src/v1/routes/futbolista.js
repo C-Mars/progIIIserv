@@ -7,7 +7,7 @@ const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutboli
 
 
 //Buscar Futbolista  
- router.get('/futbolistas', buscarFutbolista);
+router.get('/futbolistas', buscarFutbolista);
 //Buscar Futbolista  Por ID
 router.get('/futbolistas/:idFutbolista', buscarPorIdFutbolista)
  
