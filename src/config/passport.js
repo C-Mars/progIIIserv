@@ -36,7 +36,7 @@ passport.use(new JWTStrategy({
 
     async (jwtPayload, cb) => {
         console.log(process.env.JWT_SECRET)
-        // console.log(jwtPayload)
+        console.log(jwtPayload)
         const usaurio = await usuarioDB.buscarPorId(jwtPayload.idUsuario); 
         if (usaurio) {
             return cb(null, usaurio);
