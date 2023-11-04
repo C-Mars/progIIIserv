@@ -72,8 +72,16 @@ exports.eliminarFutbolista = async (req, res) => {
 
 
 exports.crearFutbolista = async (req, res) => {
-    const { dni, nombre, apellido, posicion, apodo, pieHabil, foto } = req.body;
-
+    const { dni, nombre, apellido, posicion, apodo, pieHabil} = req.body;
+ // obtengo el nombre del archivo que manda el cliente
+     // obtengo el nombre del archivo que manda el cliente
+     let filename;
+     if(!req.file){
+         filename = 'default.jpg'; 
+     }else{
+         filename = req.file.filename; 
+     }
+ 
     if (!dni || !nombre || !apellido || !posicion || !apodo || !pieHabil) {
         return res.status(404).json({ estado: 'FALLO', msj: 'Todos los campos son obligatorios' });
     } else {
@@ -85,10 +93,9 @@ exports.crearFutbolista = async (req, res) => {
             posicion: posicion,
             apodo: apodo,
             pieHabil: pieHabil,
-            foto: foto
+            foto: filename // guardo en la base de datos el nombre del archivo
            
         };
-
         try {
             const futbolistaNuevo = await futbolistaBD.crear(futbolista);
             res.status(201).json({ estado: 'OK', msj: 'Futbolista creado', dato: futbolistaNuevo });

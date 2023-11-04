@@ -88,9 +88,7 @@ const eliminar = async (idFutbolista) => {
 const crear = async (futbolista) => {
     const consulta = `INSERT INTO futbolista SET ?`;
     const [futbolistaNuevo] = await conexion.query(consulta, futbolista);
-
     // console.log(futbolistaNuevo.insertId);
-
     return buscarPorId(futbolistaNuevo.insertId);
 };
 

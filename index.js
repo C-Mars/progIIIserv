@@ -15,7 +15,7 @@ const fs = require('fs');
 
 const path = require('path');
 
-  
+
 
 // utilizar el módulo cors
 const cors = require('cors');
@@ -28,7 +28,7 @@ app.use(cors());
 
 // para que los datos que ingresen sean en formato json.
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
 // CREA UN ARCHIVO DE ACCESO
 // create a write stream (in append mode)
@@ -45,6 +45,24 @@ const v1Rival = require('./src/v1/routes/rival')
 const v1Convocatoria = require('./src/v1/routes/convocatoria')
 const v1FutbolistaConvocatoria = require('./src/v1/routes/futbolistaconvocatoria');
 
+// Ruta pública para acceder a los imagenes
+// app.get('/archivos/:nombreArchivo', (req, res) => {
+//        const nombreArchivo = req.params.nombreArchivo;
+//        res.sendFile(path.join(__dirname, 'archivos', nombreArchivo));
+// });
+// const fs = require('fs');
+
+app.get('/archivos/:nombreArchivo', (req, res) => {
+       const nombreArchivo = req.params.nombreArchivo;
+       const rutaArchivo = path.join(__dirname, 'src', 'archivos', nombreArchivo);
+   
+       if (fs.existsSync(rutaArchivo)) {
+           res.sendFile(rutaArchivo);
+       } else {
+           res.status(404).json({ estado: 'FALLO', msj: 'Archivo no encontrado' });
+       }
+   });
+   
 // middleeare api (use las rutas definidas)
 app.use('/api/v1/publico', v1Publico);
 app.use('/api/v1/futbolista', v1Futbolista);
@@ -55,7 +73,7 @@ app.use('/api/v1/futbolistaconvocatoria', v1FutbolistaConvocatoria);
 
 
 /*listen recibe dos los parámetros: 1- puerto en donde el servidor se encarga de 
-atender, 2-f de callback (utilizo un console para saber si funciona)*/ 
-app.listen(process.env.PUERTO,()=>{
-       console.log('API Campus AFA iniciada'); 
+atender, 2-f de callback (utilizo un console para saber si funciona)*/
+app.listen(process.env.PUERTO, () => {
+       console.log('API Campus AFA iniciada');
 });

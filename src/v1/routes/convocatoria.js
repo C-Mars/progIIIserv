@@ -13,11 +13,11 @@ router.get('/convocatorias/:idConvocatoria', buscarPorIdConvocaroria);
 
 //agregar convocatoria
 
-router.post('/nuevaconvocatoria',crearConvocatoria);
+router.post('/convocatorias',crearConvocatoria);
 //Editar
-router.put('/editarconvocatoria/:idConvocatoria', editarConvocatoria)
+router.put('/convocatorias/:idConvocatoria', editarConvocatoria)
 
-router.put('/resultados/:idConvocatoria',editarConvocatoriaResultados)
+router.put('/convocatorias/resultados/:idConvocatoria',editarConvocatoriaResultados)
 //Eliminar Convocaroria
 router.delete('/convocatorias/:idConvocatoria',eliminarConvocatoria)
 

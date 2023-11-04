@@ -61,7 +61,7 @@ exports.crearConvocatoria = async (req, res) => {
 
 
 exports.editarConvocatoria = async (req, res) => {
-    const { fecha, rival } = req.body;
+    const { fecha, rival, golesRecibidos, golesConvertidos} = req.body;
     const idConvocatoria = req.params.idConvocatoria;
 
 
@@ -70,7 +70,9 @@ exports.editarConvocatoria = async (req, res) => {
     } else {
         const convocatoria = {
             fecha: fecha,
-            rival: rival
+            rival: rival,
+            golesRecibidos: golesRecibidos,
+            golesConvertidos: golesConvertidos
         }
         try {
             const convocatoriaModificada = await convocatoriaBD.editarConvocatoria(convocatoria, idConvocatoria);

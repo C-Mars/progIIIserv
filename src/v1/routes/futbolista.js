@@ -1,10 +1,10 @@
 
 const { Router } = require('express');
-const router = Router(); 
+
 const { buscarFutbolista, eliminarFutbolista, buscarPorIdFutbolista,crearFutbolista,editarFutbolistaId,buscarPorApellido} = require('../../controllers/futbolista');
+const { upload } = require('../../controllers/subirArchivo');
 
-
-
+const router = Router(); 
 
 //Buscar Futbolista  
 router.get('/futbolistas', buscarFutbolista);
@@ -16,7 +16,7 @@ router.get('/apellido/:apellido', buscarPorApellido)
 
 //Agregar  Futbolista
 
-router.post('/futbolistas', crearFutbolista)
+router.post('/futbolistas', upload, crearFutbolista)
 
 //eliminar Futbolista
 router.delete('/futbolistas/:idFutbolista', eliminarFutbolista)
