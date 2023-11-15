@@ -76,7 +76,7 @@ app.get('/archivos/:nombreArchivo', (req, res) => {
 app.use('/api/v1/auth', v1Auth);
 app.use('/api/v1/publico', v1Publico);
 app.use('/api/v1/futbolista',[passport.authenticate('jwt', {session: false}), esEntrenador], v1Futbolista);
-app.use('/api/v1/convocatoria', v1Convocatoria);
+app.use('/api/v1/convocatoria',[passport.authenticate('jwt', {session: false}), esEntrenador], v1Convocatoria);
 app.use('/api/v1/rival', v1Rival);
 app.use('/api/v1/futbolistaconvocatoria', v1FutbolistaConvocatoria);
 app.use('/api/v1/estadistica', [passport.authenticate('jwt', {session: false}), esPresidente], v1Estadistica);

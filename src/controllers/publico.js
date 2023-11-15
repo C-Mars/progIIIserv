@@ -51,7 +51,7 @@ exports.enviarCorreo = async(req,res) =>{
     
     const opciones = {
         from : 'API CampusAFA',
-        to : 'queloniochem@gmail.com',
+        to : '',
         suject: 'Contacto',
         html: correoHtml
     }
